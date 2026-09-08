@@ -1,0 +1,23 @@
+:root { --log-blue: #14558d; --log-ink: #17212b; --log-line: #c8d0d9; --log-paper: #f7f8fa; }
+body { color: var(--log-ink); background: var(--log-paper); }
+.log-header { display: flex; align-items: center; justify-content: space-between; min-height: 76px; padding: 0 8vw; background: #fff; border-bottom: 2px solid var(--log-ink); }
+.log-brand { display: inline-flex; align-items: center; gap: 10px; font: 700 1.05rem 'Inter Tight', sans-serif; letter-spacing: .08em; }
+.log-brand img { width: 32px; height: 32px; object-fit: contain; }
+.log-back { color: var(--log-blue); font-size: .9rem; }
+.log-main { max-width: 920px; margin: 0 auto; padding: 76px 30px 110px; }
+.log-meta { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; color: var(--log-blue); font: 700 .9rem 'Inter Tight', sans-serif; letter-spacing: .07em; }
+.log-meta time { color: #52616f; font-weight: 400; }
+.log-title { max-width: 800px; margin: 0 0 30px; font-size: clamp(2.5rem, 6vw, 5.2rem); line-height: 1.18; letter-spacing: -.06em; }
+.log-lead { max-width: 680px; margin-bottom: 58px; font-size: 1.05rem; line-height: 2; }
+.log-rule { height: 2px; margin-bottom: 56px; background: var(--log-ink); }
+.log-section { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 42px; padding: 0 0 48px; margin-bottom: 48px; border-bottom: 1px solid var(--log-line); }
+.log-section:last-of-type { margin-bottom: 0; }
+.log-label { color: var(--log-blue); font: 700 1rem 'BIZ UDP Gothic', sans-serif; letter-spacing: .04em; }
+.log-section h2 { margin: 0 0 20px; font-size: 1.65rem; line-height: 1.4; letter-spacing: -.04em; }
+.log-section p { margin-bottom: 18px; font-size: 1rem; }
+.log-list { margin: 0; padding-left: 1.4em; font-size: 1rem; }
+.log-list li { padding: 4px 0; }
+.log-note { padding: 20px 22px; background: #e9eef4; border-left: 4px solid var(--log-blue); font-size: .95rem; }
+.log-photo-placeholder { display: grid; place-items: center; min-height: 210px; margin-top: 24px; border: 1px dashed #9daab6; color: #52616f; background: #eef2f6; text-align: center; }
+.log-footer { display: flex; justify-content: space-between; gap: 20px; padding: 30px 8vw; background: #fff; border-top: 1px solid var(--log-line); color: #52616f; font-size: .82rem; }
+@media (max-width: 700px) { .log-header { padding: 0 6vw; }.log-main { padding: 56px 6vw 80px; }.log-meta { display: block; }.log-meta time { display: block; margin-top: 5px; }.log-lead { font-size: 1rem; }.log-section { display: block; padding-bottom: 34px; margin-bottom: 34px; }.log-label { margin-bottom: 18px; }.log-section h2 { font-size: 1.4rem; }.log-footer { display: block; padding: 25px 6vw; }.log-footer p { margin: 6px 0; } }
