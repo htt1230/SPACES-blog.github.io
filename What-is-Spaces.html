@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="SPACESは、夢プロジェクトとしてスマートキャンパスの実現に取り組むチームです。">
+	<title>SPACES | 駐車場混雑状況可視化プロジェクト</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header class="site-header">
+		<a class="brand" href="#top" aria-label="SPACES ホーム">
+			<img class="brand-logo" src="signage-images/SPACES.png" alt="SPACES">
+			<span>SPACES</span>
+		</a>
+		<nav class="main-nav" aria-label="メインナビゲーション">
+			<a href="#problem">背景</a>
+			<a href="#outcomes">効果</a>
+			<a href="#comparison">比較</a>
+			<a href="#project">計画</a>
+			<a href="#system">構成</a>
+			<a href="#schedule">予定</a>
+		</nav>
+		<a class="header-link" href="#problem">背景 <span aria-hidden="true">↗</span></a>
+	</header>
+
+	<main id="top">
+		<section class="hero" aria-labelledby="hero-title">
+			<div class="hero-copy">
+				<p class="eyebrow"><span class="eyebrow-line"></span> 夢プロジェクト / 駐車場情報化</p>
+				<h1 id="hero-title">駐車場の状況を、<br><strong>正確に伝える。</strong></h1>
+				<p class="hero-lead">SPACESは、カメラによる自動検知とデジタル表示を用いて、駐車場の空き状況を可視化するプロジェクトです。</p>
+				<a class="button button-dark" href="#problem">なぜ始めるのか <span>↓</span></a>
+			</div>
+				<div class="hero-visual" aria-label="デジタル看板のイメージ">
+					<img src="signage-images/digital_kanban.png" alt="空・混・満を表示するデジタル看板">
+					<div class="hero-visual-note">DIGITAL SIGNAGE<br>試作イメージ</div>
+			</div>
+		</section>
+
+			<section class="intro section-grid" id="problem">
+				<div class="section-index">01 <span>/</span> 背景</div>
+			<div class="intro-content">
+					<p class="kicker">このプロジェクトを始めた理由</p>
+					<h2>空いたはずなのに、<br><span>満車として扱われる。</span></h2>
+					<p>発端は、駐車場の出口から車が出ていくのを見て、空きができたと判断して入場した出来事でした。しかし、警備員はまだ満車だと判断しており、転回して出るよう案内しました。そこで、空いていなければ出ると伝えて入場したところ、実際には1台分の空きがありました。現場の状況と表示・運用の認識差をなくすため、駐車場の状態をより正確かつ速やかに伝える仕組みをつくります。</p>
+			</div>
+				<div class="intro-note">情報の遅れをなくし、<br>入場前の判断を確かにする。</div>
+		</section>
+
+		<section class="outcomes section-light" id="outcomes">
+			<div class="section-heading compact">
+				<div class="section-index">02 <span>/</span> 効果</div>
+				<p class="kicker">導入によって目指す状態</p>
+				<h2>情報を正確に伝え、<br>運用の負担を減らす。</h2>
+			</div>
+			<div class="outcome-grid">
+				<article class="outcome-card"><span class="outcome-number">01</span><h3>空車の明確化</h3><p>センサーと連動した表示更新により、駐車場の状態を入場前から確認できるようにします。</p></article>
+				<article class="outcome-card"><span class="outcome-number">02</span><h3>時間の短縮</h3><p>空き状況の把握を正確にし、不要な入庫や転回を減らします。</p></article>
+				<article class="outcome-card"><span class="outcome-number">03</span><h3>警備員業務の簡素化</h3><p>満車表示のための巡回・看板更新の回数を減らし、現場の負担軽減につなげます。</p></article>
+			</div>
+		</section>
+
+		<section class="comparison section-grid" id="comparison">
+			<div class="section-index">03 <span>/</span> 比較</div>
+			<div class="comparison-main">
+				<p class="kicker">現状と導入案</p>
+				<h2>アナログ看板から、<br>更新できる表示へ。</h2>
+				<div class="comparison-table" role="table" aria-label="アナログ看板とデジタル看板のメリット・デメリット比較">
+					<div class="comparison-row comparison-head" role="row"><strong role="columnheader">方式</strong><strong role="columnheader">メリット</strong><strong role="columnheader">デメリット</strong></div>
+					<div class="comparison-row analog-row" role="row"><strong role="rowheader">アナログ看板<br><small>現状</small></strong><span role="cell">導入・運用が簡単<br>追加のシステムが不要</span><span role="cell">更新が手動でタイムラグが発生<br>情報の正確性が低い</span></div>
+					<div class="comparison-row digital-row" role="row"><strong role="rowheader">デジタル看板<br><small>導入案</small></strong><span role="cell">情報を自動更新<br>夜間・雨天時も自発光で見やすい<br>警備員の巡回負担を軽減</span><span role="cell">機器・電源・通信の整備が必要<br>降雪時は誤検知対策が必要</span></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="project section-dark" id="project">
+			<div class="section-heading">
+				<div class="section-index">04 <span>/</span> 計画</div>
+				<p class="kicker">今年度の目的</p>
+				<h2>駐車場の混雑を、<br><span>リアルタイムに可視化する。</span></h2>
+			</div>
+			<div class="project-statement">
+				<p>カメラによる自動検知とWeb情報共有媒体を導入し、駐車場の混雑状況をリアルタイムに可視化します。利用者が入場前に状況を判断できる環境を整え、不要な入退場を減らします。</p>
+				<p class="muted">降雪による誤検知リスクを考慮し、「IoT検知」と「警備員による目視・手動運用」を組み合わせたハイブリッド管理を採用します。</p>
+			</div>
+			<div class="principles">
+				<article><span>01</span><h3>見える</h3><p>混雑状況をリアルタイムに共有し、利用者が事前に判断できる状態へ。</p></article>
+				<article><span>02</span><h3>つながる</h3><p>検知データと現場の判断をひとつのシステムに統合。</p></article>
+				<article><span>03</span><h3>続けられる</h3><p>誰でも運用でき、将来の大学組織へ移管できる仕組みをつくる。</p></article>
+			</div>
+		</section>
+
+		<section class="phases section-grid" id="phases">
+			<div class="section-index">05 <span>/</span> 段階</div>
+			<div class="phases-main">
+				<p class="kicker">段階的な導入</p>
+				<h2>現場の運用を守りながら、<br>段階的に導入する。</h2>
+				<div class="phase-list">
+					<article><div class="phase-number">01</div><div><h3>検知を通知する</h3><p>カメラが満車状況を検知。警備員へ通知し、看板設置のための巡回負担を減らします。</p></div></article>
+					<article><div class="phase-number">02</div><div><h3>表示を自動で切り替える</h3><p>可動式LED看板を導入し、状況に応じて表示を自動切替します。</p></div></article>
+					<article><div class="phase-number">03</div><div><h3>どこからでも確認する</h3><p>ブラウザからアクセスできるWebシステムを公開。学生や利用者が空き状況を確認できます。</p></div></article>
+				</div>
+			</div>
+		</section>
+
+		<section class="system section-light" id="system">
+			<div class="section-heading compact"><div class="section-index">06 <span>/</span> 構成</div><p class="kicker">システム構成</p><h2>検知・判断・表示を、<br>ひとつの流れに。</h2></div>
+			<div class="system-columns">
+				<article class="system-card"><span class="card-tag">HARDWARE</span><h3>検知と表示</h3><ul><li>屋外用P10 LEDマトリックスパネル ×2</li><li>Wi-Fi通信マイコン（ESP32）</li><li>Raspberry Pi 5 + USBカメラ</li><li>専用電源 / 管理デバイス</li></ul></article>
+				<article class="system-card system-card-accent"><span class="card-tag">SOFTWARE</span><h3>解析と共有</h3><ul><li>Python / OpenCV による動体検知</li><li>Python / FastAPI によるデータ統合</li><li>React によるダッシュボード</li><li>警備員向け管理画面</li></ul></article>
+			</div>
+			<div class="signage-states"><div><p class="kicker">表示ステータス</p><h3>利用者に伝える3つの状態</h3></div><figure><img src="signage-images/空.png" alt="空車表示"><figcaption>空</figcaption></figure><figure><img src="signage-images/混.png" alt="混雑表示"><figcaption>混</figcaption></figure><figure><img src="signage-images/満.png" alt="満車表示"><figcaption>満</figcaption></figure></div>
+			
+		</section>
+
+		<section class="schedule section-grid" id="schedule">
+			<div class="section-index">07 <span>/</span> 予定</div>
+			<div class="schedule-main"><p class="kicker">年間スケジュール</p><h2>検証の一年。</h2><div class="timeline">
+				<div><time>06 — 08</time><h3>夏季検証</h3><p>検知テスト / 正解データ蓄積 / 通知システム開発</p></div>
+				<div><time>09 — 10</time><h3>表示をつくる</h3><p>デジタル看板の設計・制作</p></div>
+				<div><time>11 — 12</time><h3>冬季モード</h3><p>手動運用の実装 / 学会発表</p></div>
+				<div><time>01 — 02</time><h3>評価と継続</h3><p>運用マニュアル / データ比較 / 有用性評価</p></div>
+			</div></div>
+		</section>
+
+		<section class="journal section-dark" id="journal"><div class="journal-inner"><div><p class="kicker">活動記録</p><h2>検証の結果を、<br><span>次の改善へつなげる。</span></h2><p>夏季の検知精度、冬季の手動切り替え運用、警備員向けUI/UXの検証結果を記録し、将来の運用と移管に活かします。</p></div><a class="button button-light" href="#journal">活動記録を準備中 <span>↗</span></a></div></section>
+	</main>
+	<footer id="footer"><div class="footer-brand"><img class="brand-logo" src="signage-images/SPACES.png" alt="SPACES"> SPACES</div><p>夢プロジェクト / 駐車場混雑状況可視化</p><p>© 2025 SPACES</p></footer>
+	<script src="script.js"></script>
+</body>
+</html>
