@@ -15,7 +15,7 @@ const extractTitle = (html) => {
     return h1[1].replace(/<[^>]+>/g, '').trim();
   }
 
-  return '無題の活動記録';
+  return '無題のブログ';
 };
 
 const extractDate = (html) => {
@@ -35,7 +35,7 @@ const extractSummary = (html) => {
     return firstParagraph[1].replace(/<[^>]+>/g, '').trim();
   }
 
-  return '活動記録の詳細を確認できます。';
+  return 'ブログの詳細を確認できます。';
 };
 
 const entries = files.map((fileName, index) => {

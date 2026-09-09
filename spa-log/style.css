@@ -14,11 +14,11 @@ body { color: var(--log-ink); background: var(--log-paper); }
 .log-section:last-of-type { margin-bottom: 0; }
 .log-label { color: var(--log-blue); font: 700 1rem 'BIZ UDP Gothic', sans-serif; letter-spacing: .04em; }
 .log-section h2 { margin: 0 0 20px; font-size: 1.65rem; line-height: 1.4; letter-spacing: -.04em; }
-.log-section p { margin-bottom: 18px; font-size: 1rem; }
+.log-section p { margin: 8px 0px; font-size: 1rem; }
 .log-list { margin: 0; padding-left: 1.4em; font-size: 1rem; }
 .log-list li { padding: 4px 0; }
 .log-note { padding: 20px 22px; background: #e9eef4; border-left: 4px solid var(--log-blue); font-size: .95rem; }
-.log-photo-wrap { margin: 24px 0 0; }
+.log-photo-wrap { margin: 12px 0; }
 .log-photo, .log-video { display: block; width: 100%; max-height: 540px; object-fit: cover; border: 1px solid #dfe5eb; background: #eef2f6; }
 .log-video { max-height: 420px; }
 .log-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 20px; }

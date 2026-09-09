@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="SPACES活動記録の一覧ページ。作業の記録を時系列でまとめて閲覧できます。">
-	<title>活動記録一覧 | SPACES</title>
+	<meta name="description" content="SPACESブログの一覧ページ。作業の記録を時系列でまとめて閲覧できます。">
+	<title>ブログ一覧 | SPACES</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,15 +21,15 @@
 	</header>
 
 	<main class="log-main">
-		<div class="log-meta"><span>活動記録</span><time>一覧</time></div>
-		<h1 class="log-title">活動記録一覧</h1>
+		<div class="log-meta"><span>ブログ</span><time>一覧</time></div>
+		<h1 class="log-title">ブログ一覧</h1>
 		<p class="log-lead">SPACESでの試作・検証・工作の記録を、時系列でまとめて見ることができます。新しい記録が増えるたびにこの一覧にも追加されます。</p>
 		<div class="log-rule"></div>
 		<div id="log-list" class="log-card-grid" aria-live="polite"></div>
 	</main>
 
 	<footer class="log-footer">
-		<p>SPACES / 活動記録</p>
+		<p>SPACES / ブログ</p>
 		<p>夢プロジェクト / 駐車場混雑状況可視化</p>
 	</footer>
 
@@ -54,7 +54,7 @@
 				article.className = 'log-card';
 				const label = document.createElement('div');
 				label.className = 'log-card-meta';
-				label.innerHTML = `<span>活動記録 / ${String(index + 1).padStart(2, '0')}</span><time>${entry.date || '不明'}</time>`;
+				label.innerHTML = `<span>ブログ / ${String(index + 1).padStart(2, '0')}</span><time>${entry.date || '不明'}</time>`;
 
 				const heading = document.createElement('h2');
 				heading.textContent = entry.title || '無題の記録';
