@@ -23,38 +23,36 @@
 			<a href="#project">計画</a>
 			<a href="#system">構成</a>
 			<a href="#schedule">予定</a>
-			<a href="spa-log/index.html">ブログ</a>
 		</nav>
-		<a class="header-link" href="#problem">背景 <span aria-hidden="true">↗</span></a>
+		<a class="header-link" href="spa-log/index.html">ブログ</a>
 	</header>
 
 	<main id="top">
 		<section class="hero" aria-labelledby="hero-title">
 			<div class="hero-copy">
-				<p class="eyebrow"><span class="eyebrow-line"></span> 夢プロジェクト / 駐車場情報化</p>
-				<h1 id="hero-title">駐車場の状況を、<br><strong>正確に伝える。</strong></h1>
+				<h1 id="hero-title">駐車場<span style="font-size: 75%;">の状況を、<br><strong>正確に伝える。</strong></h1>
 				<p class="hero-lead">SPACESは、カメラによる自動検知とデジタル表示を用いて、駐車場の空き状況を可視化するプロジェクトです。</p>
 				<a class="button button-dark" href="#problem">なぜ始めるのか <span>↓</span></a>
 			</div>
 				<div class="hero-visual" aria-label="デジタル看板のイメージ">
 					<img src="signage-images/digital_kanban.png" alt="空・混・満を表示するデジタル看板">
-					<div class="hero-visual-note">DIGITAL SIGNAGE<br>試作イメージ</div>
+					<div class="hero-visual-note">試作イメージ</div>
 			</div>
 		</section>
 
 			<section class="intro section-grid" id="problem">
-				<div class="section-index">01 <span>/</span> 背景</div>
+				<div class="section-index">背景</div>
 			<div class="intro-content">
 					<p class="kicker">このプロジェクトを始めた理由</p>
 					<h2>空いたはずなのに、<br><span>満車として扱われる。</span></h2>
 					<p>発端は、駐車場の出口から車が出ていくのを見て、空きができたと判断して入場した出来事でした。しかし、警備員はまだ満車だと判断しており、転回して出るよう案内しました。そこで、空いていなければ出ると伝えて入場したところ、実際には1台分の空きがありました。現場の状況と表示・運用の認識差をなくすため、駐車場の状態をより正確かつ速やかに伝える仕組みをつくります。</p>
 			</div>
-				<div class="intro-note">情報の遅れをなくし、<br>入場前の判断を確かにする。</div>
+				
 		</section>
 
 		<section class="outcomes section-light" id="outcomes">
 			<div class="section-heading compact">
-				<div class="section-index">02 <span>/</span> 効果</div>
+				<div class="section-index">効果</div>
 				<p class="kicker">導入によって目指す状態</p>
 				<h2>情報を正確に伝え、<br>運用の負担を減らす。</h2>
 			</div>
@@ -66,7 +64,7 @@
 		</section>
 
 		<section class="comparison section-grid" id="comparison">
-			<div class="section-index">03 <span>/</span> 比較</div>
+			<div class="section-index">比較</div>
 			<div class="comparison-main">
 				<p class="kicker">現状と導入案</p>
 				<h2>アナログ看板から、<br>更新できる表示へ。</h2>
@@ -78,9 +76,9 @@
 			</div>
 		</section>
 
-		<section class="project section-dark" id="project">
+		<section class="project" id="project">
 			<div class="section-heading">
-				<div class="section-index">04 <span>/</span> 計画</div>
+			<div class="section-index">計画</div>
 				<p class="kicker">今年度の目的</p>
 				<h2>駐車場の混雑を、<br><span>リアルタイムに可視化する。</span></h2>
 			</div>
@@ -96,7 +94,7 @@
 		</section>
 
 		<section class="phases section-grid" id="phases">
-			<div class="section-index">05 <span>/</span> 段階</div>
+			<div class="section-index">段階</div>
 			<div class="phases-main">
 				<p class="kicker">段階的な導入</p>
 				<h2>現場の運用を守りながら、<br>段階的に導入する。</h2>
@@ -109,7 +107,7 @@
 		</section>
 
 		<section class="system section-light" id="system">
-			<div class="section-heading compact"><div class="section-index">06 <span>/</span> 構成</div><p class="kicker">システム構成</p><h2>検知・判断・表示を、<br>ひとつの流れに。</h2></div>
+			<div class="section-heading compact"><div class="section-index">構成</div><p class="kicker">システム構成</p><h2>検知・判断・表示を、<br>ひとつの流れに。</h2></div>
 			<div class="system-columns">
 				<article class="system-card"><span class="card-tag">HARDWARE</span><h3>検知と表示</h3><ul><li>屋外用P10 LEDマトリックスパネル ×2</li><li>Wi-Fi通信マイコン（ESP32）</li><li>Raspberry Pi 5 + USBカメラ</li><li>専用電源 / 管理デバイス</li></ul></article>
 				<article class="system-card system-card-accent"><span class="card-tag">SOFTWARE</span><h3>解析と共有</h3><ul><li>Python / OpenCV による動体検知</li><li>Python / FastAPI によるデータ統合</li><li>React によるダッシュボード</li><li>警備員向け管理画面</li></ul></article>
@@ -119,7 +117,7 @@
 		</section>
 
 		<section class="schedule section-grid" id="schedule">
-			<div class="section-index">07 <span>/</span> 予定</div>
+			<div class="section-index">予定</div>
 			<div class="schedule-main"><p class="kicker">年間スケジュール</p><h2>検証の一年。</h2><div class="timeline">
 				<div><time>6月 ～ 8月</time><h3>夏季検証</h3><p>検知テスト / 正解データ蓄積 / 通知システム開発</p></div>
 				<div><time>9月 ～ 10月</time><h3>表示をつくる</h3><p>デジタル看板の設計・制作</p></div>
