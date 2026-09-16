@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="SPACESブログ。2026年9月8日のデジタル看板筐体作成について。">
+	<title>仮設置してみた| SPACES ブログ</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header class="log-header">
+		<a class="log-brand" href="../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../signage-images/SPACES.png" alt="SPACES">
+			<span>SPACES</span>
+		</a>
+		<a class="log-back" href="/spa-log/">ブログ一覧</a>
+	</header>
+
+	<main class="log-main">
+		<div class="log-meta"><span>ブログ</span><time datetime="2026-09-16">2026.09.16</time></div>
+		<h1 class="log-title">看板を仮設置してみた</h1>
+		<h2>筆者:E</h2>
+		<p class="log-lead">防水加工はどうしたの❓って感じだけど、今回は管財課の方にお願いしてポータブル電源を貸してもらい、外での視認性確認をしました。</p>
+
+		
+		<div class="log-rule"></div>
+
+		<section class="log-section">
+			<div class="log-label">移動</div>
+			<div>
+				<h2>台車を借りる</h2>
+				<p>A棟1階の階段裏にある台車<span class="opa">(知らなかった)</span>を借りて、看板のある場所まで移動しました。</p>
+				<p><span class="emphasize">なんかモバイルバッテリー切れてるんだけど？！</span> 前回esp32に接続しっぱなしで電力を消耗してたっぽい泣</p>
+				<p>まあなんとかなるだろ。そうして、看板を台車に乗せて慎重に運び出します。配線が外れないかヒヤヒヤする。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260916/IMG_3570.jpg" alt="">
+				</figure>
+			</div>
+		</section>
+
+
+		<section class="log-section">
+			<div class="log-label">動作テスト</div>
+			<div>
+				<h2>仮設置</h2>
+				<p>初めて外に出て感動している看板君を押しながら、第１駐車場入口付近まで持っていきます。</p>
+				<p>警備室に着くと先ほどの管財課の方と警備の方々がいました。<br>管財課の方のポータブル電源を借りて、AC100V電源を接続すると予想通りのリアクションが来ました！<span class="opa">（嬉しい）</span></p>
+				<p>移動でケーブル類外れなくてよかった...</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260916/IMG_3572.jpg" alt="">
+				</figure>
+				<h2>wifi通信の弱点</h2>
+				<p>esp32で鯖立てして、wifi接続して操作をすることはできたのだが、問題は距離だ。</p>
+				<p>看板との距離が遠いとすぐに切れてしまう。これはアカン。</p>
+			</div>
+		</section>
+
+
+
+		<section class="log-section">
+			<div class="log-label">視認性</div>
+			<div>
+	
+				<h2>とりあえず光らせた</h2>
+				<p>看板を置いてみた。外だからシャッタースピードが短くなってLEDがまともに映せない。</p>
+				<p>とりあえず長時間露光で撮ってみた。(ちょっとブレてる)</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260916/IMG_3582.jpg" alt="">
+				</figure>
+				<h2>Q.外でも見える？</h2>
+				<p>A.今日は快晴です。でもみた感じ大丈夫そう。</p>
+				<p>逆に夜とか雨の時は明るすぎるかもしれないから、輝度値を下げれば大丈夫だろう。</p>
+				<h2>Q.遠くからの視認性どうなんだろう。</h2>
+				<p>A.遠くから見ても赤い表示が見える。<s>赤ければ満車だから分かるだろう。</s></p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260916/IMG_3576.jpg" alt="">
+				</figure>
+				<h2>Q.運転者目線で見える？</h2>
+				<p>A.敷地問題があるので、常設するとすればちょっと大学寄りになるだろう。木の隙間から見えそう。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260916/IMG_3578.jpg" alt="">
+				</figure>
+
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">電源確保</div>
+			<div>
+	
+				<h2>工事の必要性</h2>
+				<p>実は警備員室の中に電源があるが、延長コードを使うよりいい方法がないか探っている。</p>
+				<p>(延長コードを使うとコードの上を通過する車がいるためよろしくない)</p>
+				<p>AC100Vのポータブル電源を使うか、別の電圧の電源を使うか、色々試す必要がありそう。</p>
+				<p class="opa">大学に認められた時に、工事が可能なのかもしれない。</p>
+			</div>
+		</section>
+
+
+		<section class="log-section">
+			<div class="log-label">次回</div>
+			<div>
+				<h2>通信方法の検討</h2>
+				<div class="log-note">ローカルWifi接続だと5~10m程度しか届かなかった。次回はBLEとかHUS-WIFIを借りるか、アンテナつけたり色々考える必要がありそう。</div>
+			</div>
+		</section>
+
+
+	</main>
+
+	<footer class="log-footer">
+		<p>SPACES / ブログ</p>
+		<p>夢プロジェクト / 駐車場混雑状況可視化</p>
+	</footer>
+</body>
+</html>
