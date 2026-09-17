@@ -6,6 +6,14 @@ const files = fs.readdirSync(root)
   .filter((name) => name.endsWith('.html') && name !== 'index.html')
   .sort((a, b) => a.localeCompare(b, 'ja'));
 
+// Explicit list labels take priority over the article heading and opening text.
+const extractListMeta = (html, name) => {
+  const match = html.match(new RegExp('<meta\\s+name="log-' + name + '"\\s+content="([^"]*)"\\s*/?>', 'i'));
+  if (!match) return null;
+  return match[1].replace(/&quot;/g, '"').replace(/&#x27;/g, "'")
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+};
+
 const extractTitle = (html) => {
   const match = html.match(/<title>(.*?)<\/title>/i);
   if (match && match[1]) return match[1].trim();
@@ -43,10 +51,10 @@ const entries = files.map((fileName, index) => {
   const html = fs.readFileSync(filePath, 'utf8');
 
   return {
-    title: extractTitle(html),
+    title: extractListMeta(html, 'title') ?? extractTitle(html),
     file: fileName,
     date: extractDate(html),
-    summary: extractSummary(html),
+    summary: extractListMeta(html, 'summary') ?? extractSummary(html),
     order: index + 1
   };
 });
