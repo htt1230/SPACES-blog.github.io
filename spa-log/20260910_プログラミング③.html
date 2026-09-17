@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="SPACESブログ。ESP32につないだ2枚のLEDパネルに文字を表示し、LED MakerのUSB送信から駐車場向け画面とWi-Fi操作へ進めた記録。">
+	<title>プログラミング③ | ESP32で光ったLEDパネルを，2枚の表示とWeb操作へつなげるまで</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+	<style>
+		.log-diagram { max-width: 100%; margin: 20px 0; padding: 20px 22px; overflow-x: auto; background: #e9eef4; border-left: 4px solid var(--log-blue); font-size: .9rem; line-height: 1.7; }
+		.log-diagram code { font-family: Consolas, "BIZ UDP Gothic", monospace; }
+	</style>
+</head>
+<body>
+	<header class="log-header">
+		<a class="log-brand" href="../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../signage-images/SPACES.png" alt="SPACES">
+			<span>SPACES</span>
+		</a>
+		<a class="log-back" href="/spa-log/">ブログ一覧</a>
+	</header>
+
+	<main class="log-main">
+<div class="log-meta"><span>ブログ</span><time datetime="2026-09-10">2026.09.10</time></div>
+<h1 class="log-title">ESP32で光ったLEDパネルを，2枚の表示とWeb操作へつなげるまで</h1>
+<p class="log-lead">前回は，Arduino Unoで動かしていたLEDパネルをESP32へ載せ替えて，とりあえず実際に光らせるところまで進みました．</p>
+<p>今回はその続きです．</p>
+<p>配線の時点でパネルはすでに2枚つながっていましたが，最初は光らせるだけで精一杯でした．そこから表示の向きや位置を調整して，文字を出して，ブラウザから絵を送って，最後はESP32のWi-Fiにつないで操作できるようにしました．</p>
+<section class="log-section">
+<div class="log-label">文字の表示</div>
+<div>
+<h2>「空」「混」「満」を表示する</h2>
+<p>飛ばしていますが，前回か前々回で文字を正しく表示するための調整はしてありました．</p>
+<p>友達が駐車場の看板で使うために，「空」「混」「満」の表示を用意してくれました．</p>
+<figure class="log-photo-wrap">
+	<img class="log-photo" src="images/20260910/image3.jpg" alt="" loading="lazy">
+</figure>
+<figure class="log-photo-wrap">
+	<img class="log-photo" src="images/20260910/image4.jpg" alt="" loading="lazy">
+</figure>
+<figure class="log-photo-wrap">
+	<img class="log-photo" src="images/20260910/image5.jpg" alt="" loading="lazy">
+</figure>
+<p>「混」はオレンジ色に見せたかったのですが，赤と緑を時間で切り替えるやり方だと，目を動かしたときに赤と緑が別々に見えることがありました．少しちらついて見える感じです．</p>
+<p>そこで，この8色表示では無理にオレンジを作るのではなく，赤と緑を同時に点ける黄色に寄せました．オレンジっぽさよりも，看板の文字が落ち着いて読めることを優先しました．</p>
+</div>
+</section>
+<section class="log-section">
+<div class="log-label">LED Maker</div>
+<div>
+<h2>表示を変えるたびに書き込むのは面倒だった</h2>
+<p>固定文字を出すだけなら，Arduinoのプログラムを書き換えてESP32へ書き込めばできます．しかし，表示する内容を変えるたびに書き込むのはかなり面倒です．</p>
+<p>絵を出したいときも，</p>
+<pre class="log-diagram"><code>絵のプログラムを書き直す．
+        ↓
+Arduino IDEを開いてプログラムをコピペ
+        ↓
+ESP32に書き込み
+        ↓
+表示を確認</code></pre>
+<p>なかなか面倒くさい．</p>
+<p>そこで，Webブラウザで絵を作って，その画素データをESP32へ送る「LED Maker」を作りました．</p>
+<figure class="log-photo-wrap">
+	<img class="log-photo" src="images/20260910/image6.png" alt="" loading="lazy">
+</figure>
+<p>最初のWeb版には，次の機能を入れました．</p>
+<ul class="log-list">
+<li>32×32のマス目へクリックやドラッグで描く</li>
+<li>赤，緑，青，黄，紫，水色，白，黒の8色を選ぶ</li>
+<li>PNG，JPG，WebPの画像を読み込む</li>
+<li>画像を32×32・8色へ変換する</li>
+<li>LEDっぽい見た目のプレビューで確認する</li>
+<li>作った絵をPNGとして保存する</li>
+<li>作った絵をESP32へ送る</li>
+</ul>
+<p>この段階では，ブラウザとESP32はUSBでつないでいます．Web画面から操作しますが，通信にはWeb Serialを使いました．</p>
+<pre class="log-diagram"><code>PCのブラウザで絵を作る
+        ↓ Web Serial / USB
+ESP32が32×32の画素データを受け取る
+        ↓ HUB75
+LEDパネルへ表示する</code></pre>
+<p>Web画面は，アプリのフォルダーで<code>node serve.mjs</code>を実行して，ChromeかEdgeで<code>http://localhost:8000</code>を開く構成にしました．</p>
+<p>「ESP32を接続」を押してUSBシリアルの機器を選び，「この絵を表示」を押すと送信されます．</p>
+</div>
+</section>
+
+<section class="log-section">
+<div class="log-label">駐車場の操作</div>
+<div>
+<h2>駐車場看板の表示画面を作る</h2>
+<p>駐車場で使いやすいように「空」「混」「満」を選ぶ専用画面を作りました．</p>
+<figure class="log-photo-wrap">
+	<img class="log-photo" src="images/20260910/image7.png" alt="" loading="lazy">
+</figure>
+<p>「空」は緑，「混」は黄，「満」は赤です．</p>
+<p>「混」は，混雑を示す文字と残り台数を2秒ごとに切り替えるようにしました．</p>
+<p>表示の元データには，用意してあった<code>空.txt</code>，<code>混.txt</code>，<code>満.txt</code>，<code>混2.txt</code>を使いました．それぞれ32×32の色データを持っています．Web画面から配列を編集して，表示へ反映することもできます．</p>
+<p>ただ，今はPC側でlocalhostしているためPCからしか操作できません．そこで，無線で切り替えできるようにしていきます．</p>
+</div>
+</section>
+<section class="log-section">
+<div class="log-label">Wi-Fi操作</div>
+<div>
+<h2>USBからWi-Fi操作へ</h2>
+<p>USBでつないで操作できるようになったので，次は屋外看板として使うためにWi-Fiを繫げて操作できるようにします・</p>
+<p>スマホから操作するなら，ESP32自身をWi-FiアクセスポイントとWebサーバーにすればよさそう．</p>
+<p>操作の流れは次のようになります．</p>
+<pre class="log-diagram"><code>スマホの設定画面を開く
+        ↓
+Wi-Fi一覧から「LED-KANBAN」を選んで接続する
+        ↓
+スマホのブラウザを開く
+        ↓
+http://192.168.4.1 を開く
+        ↓
+表示を選んでESP32へ送る
+        ↓
+LEDパネルへ表示する</code></pre>
+<p>スマホがESP32の<code>LED-KANBAN</code>へ直接つながる構成です．<br>操作画面のHTML，JavaScript，CSS，文字のTXTデータは，ESP32のLittleFSへ入れました．そのため，プログラム本体を書き込むだけではなく，Web画面や表示データも別で書き込む必要がありました．</p>
+<p>また，USB版ではブラウザ側で行っていた「混」と台数の2秒切り替えを，Wi-Fi版ではESP32側へ移しました．これならスマホの画面を閉じても，ESP32だけで表示を切り替え続けられます．</p>
+<p>そして，スマホで操作できるようになりました．</p>
+<figure class="log-photo-wrap">
+	<img class="log-photo" src="images/20260910/image8.jpg" alt="" loading="lazy">
+</figure>
+</div>
+</section>
+<section class="log-section">
+<div class="log-label">まとめ</div>
+<div>
+<h2>まとめ</h2>
+<p>複数のパネルを一つの画面として扱うこと，駐車場の状態を選ぶこと，ESP32自身が操作画面を出すことへと，少しずつできることが増えていきました．</p>
+<p>表示内容をプログラムへ固定していた段階から，外からデータを送って変更できる段階へ進めたので，看板として使うための形が少し見えてきました．</p>
+<p>次回はP10を実際に看板に取りつけて，4枚光らせることを目標にします．<br>ばいちゃ！</p>
+</div>
+</section>
+</main>
+
+	<footer class="log-footer">
+		<p>SPACES / ブログ</p>
+		<p>夢プロジェクト / 駐車場混雑状況可視化</p>
+	</footer>
+</body>
+</html>

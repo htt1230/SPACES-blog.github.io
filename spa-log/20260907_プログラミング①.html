@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="SPACESブログ。Arduino Uno R3で32×16・1/4 scanのP10パネル2枚を制御し、32×32のLED表示に挑戦した記録。">
+	<title>プログラミング① | Arduino Uno R3でP10 LEDを光らせた話</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header class="log-header">
+		<a class="log-brand" href="../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../signage-images/SPACES.png" alt="SPACES">
+			<span>SPACES</span>
+		</a>
+		<a class="log-back" href="/spa-log/">ブログ一覧</a>
+	</header>
+
+	<main class="log-main">
+		<div class="log-meta"><span>ブログ</span><time datetime="2026-09-10">2026.09.10</time></div>
+		<h1 class="log-title">Arduino Uno R3でP10 LEDを光らせた話</h1>
+		<p class="log-lead">プログラミング担当Aです．ESP32が届くまでにP10LEDを光らせるために頑張った話を書いていきます．</p>
+
+		<section class="log-section">
+			<div class="log-label">今回の構成</div>
+			<div>
+				<h2>Arduino Uno R3と2枚のLEDパネル</h2>
+				<ul class="log-list">
+					<li>物理パネル: 32×16・1/4 scan　2枚</li>
+					<li>配置: 上下2枚で論理32×32</li>
+					<li>信号経路: Arduino Uno R3 → 下段IN → 下段OUT → 上段IN</li>
+					<li>シフト数: 64クロック/枚、合計128クロック/アドレス</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">Pico Wで挑戦</div>
+			<div>
+				<h2>1. 最初はPico Wで動かそうとした</h2>
+				<p>最初は手元にPicoがあったのでCircuitPythonの<code>rgbmatrix</code>を使って動かそうとしました．<br>が，知識がなくAIと相談してもうまくいかなかったので断念．<br>しかし，自分が唯一触れたことのあるArduinoがあったのでそっちを使うことにしました．</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">Arduinoで挑戦</div>
+			<div>
+				<h2>2. Arduinoを使って遂に光る...か？</h2>
+				<p>Arduinoならライブラリを入れて，配線して，サンプルコードを書き込めば光ると思っていました．</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260910/IMG_5577.jpg" alt="" loading="lazy">
+				</figure>
+				<p>最初は<code>Adafruit RGBmatrixPanel</code>を使っていました．コンパイルも通るし，Arduinoにも書き込める．しかし表示されたのは，図形が分裂してぐちゃぐちゃになったり，縦線だけしか表示されなかったり，よく分からないブロックが並んだりする状態でした．</p>
+				<p>最初は配線ミスかと思い，A/B/C/Dの線を入れ替えたり，差し込みなおしたり...<br>WIDTHやHEIGHTを変えたりしましたが，何をしてもまともな形になりませんでした．</p>
+				<p>調べていくと，今回のパネルは一般的な32×16の1/8 scanではなく，P10という1/4 scanのパネルでした．見た目は同じようなLEDパネルでも，中でどう行を選んでいるかが違うらしいです．</p>
+				<p>つまり，ライブラリが想定しているパネルと，自分のパネルがそもそも合っていませんでした．</p>
+			</div>
+		</section>
+
+		<section class="log-section" id="direct-control">
+			<div class="log-label">直接制御</div>
+			<div>
+				<h2>3. ライブラリをあきらめて直接制御する</h2>
+				<p>最終的には，標準ライブラリを使わずにArduino Unoのポートを直接操作するプログラムを作ることにしました．</p>
+				<p>Arduino Uno R3はメモリが少ないし本当にできるのか不安でした．それでもRGBの信号，CLK，LAT，OE，A/Bを順番に動かしていくと，まず32×16のパネル1枚で色が出ました．</p>
+				<p>このとき，論理上は横32ドットなのに，32回クロックを送ればよいわけではありませんでした．このP10パネルは内部が8ドット単位で少し特殊に並んでいて，1枚につき64クロック必要でした．</p>
+				<p>32×16のパネルを2枚つなぐので，最終的には1アドレスごとに128クロック送ることになりました．</p>
+			</div>
+		</section>
+
+		<section class="log-section" id="coordinate-test">
+			<div class="log-label">座標テスト</div>
+			<div>
+				<h2>4. 文字より座標テストのほうが大事だった</h2>
+				<p>最初は「空」の文字を出そうとしていました．しかし文字が崩れると，フォントが悪いのか，左右反転しているのか，走査方式が間違っているのか，全く分かりませんでした．</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260910/IMG_5578.jpg" alt="" loading="lazy">
+				</figure>
+				<p>そこで文字を一度やめて，上端を赤，下端を青，左端を緑，右端を白にするテスト表示を作りました．真ん中には紫の四角を置いて，四隅にも違う色を置きました．</p>
+				<p>これを表示すると，上下左右の反転や，中央が分裂している問題が見つけやすくなりました．円のような左右対称の図形だと，反転していても気付きにくいです．</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260910/IMG_5592.jpg" alt="" loading="lazy">
+				</figure>
+				
+				<p>文字を表示したいときほど，最初は文字を使わないほうがいいと分かりました．</p>
+			</div>
+		</section>
+
+		<section class="log-section" id="panel-connection">
+			<div class="log-label">2枚の接続</div>
+			<div>
+				<h2>5. 2枚つなぐと，表示の順番が逆になる</h2>
+				<p>今回の配線は，Arduinoから下段パネルのINに入り，下段のOUTから上段のINへつないでいます．</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260910/image1.jpg" alt="" loading="lazy">
+				</figure>
+				<p>数珠つなぎなので，先に送った64クロック分のデータは奥にある上段パネルへ流れていきます．後半の64クロック分が，下段パネルに残ります．</p>
+				<p>ここを逆に考えていたので，上下が入れ替わったり，文字が変な位置に出たりしました．</p>
+				<p>さらに，2枚のパネルは取り付け方向も同じではありませんでした．上段は上下反転が必要で，下段は左右反転が必要でした．画面全体を反転するだけでは直らず，パネルごとに補正を分ける必要がありました．</p>
+				<p>少しずつ設定を変えて，赤が上，青が下，紫が中央に戻ったときはかなり嬉しかったです．</p>
+				
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">走査方式</div>
+			<div>
+				<h2>6. 「32×32」でもD線を使うとは限らない</h2>
+				<p>32×32と聞くと，A/B/C/Dの4本で16行を選ぶ1/16 scanを想像していました．実際，途中ではD線もつないで試していました．</p>
+				<p>しかし今回は，32×16・1/4 scanのパネルを2枚重ねて32×32にしているだけです．各パネルの行選択はA/Bだけで，C/Dは使いません．</p>
+				<p>見た目のサイズだけで判断すると間違えることがある，というのも今回学んだことです．</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">文字の表示</div>
+			<div>
+				<h2>7. 最後に文字を表示する</h2>
+				<p>座標が正しく表示できるようになってから，やっと文字を載せることができました．</p>
+				<p>最初は自分で作った簡単な字形を拡大していましたが，「空」が少し平たく見えました．そこでGNU Unifont-JPの16×16フォントを使い，32×32の中で1.5倍の24×24になるように表示しました．</p>
+				<p>Arduino UnoはSRAMが2048 byteしかありません．32×32の画面を持つだけで1024 byte使うので，フォントはPROGMEMに置いて，色は8色に絞りました．</p>
+				<p>最終的に，緑色の「空」と赤色の「満」を表示できました．</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260910/IMG_5594.jpg" alt="" loading="lazy">
+				</figure>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="images/20260910/IMG_5593.jpg" alt="" loading="lazy">
+				</figure>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">まとめ</div>
+			<div>
+				<h2>8. 最終的に動いた構成</h2>
+				<p>最終的には，Arduino Uno R3から32×16・1/4 scanのP10パネル2枚を制御して，32×32の表示を作ることができました．</p>
+				<p>最初は「Arduinoならすぐ光る」と思っていましたが，実際にはパネルの走査方式，内部の並び方，接続順，パネルごとの向き，フォント，Arduinoのメモリなど，いろいろな要素が重なっていました．</p>
+				<p>今回一番大事だったのは，何となく全部を変えないことでした．</p>
+				<p>配線，走査方式，表示内容を一気に変えると原因が分からなくなります．まず1枚，次に単色，次に座標テスト，最後に文字，という順番で進めたことで，少しずつ動くところまでたどり着けました．</p>
+				<p>まだLEDパネルについては分からないことだらけですが，とりあえずArduino Uno R3でP10 LEDを光らせることはできました．<br>そして次は，ESP32を使ったLED表示に挑戦します！<br>ばいちゃ！</p>
+			</div>
+		</section>
+	</main>
+
+	<footer class="log-footer">
+		<p>SPACES / ブログ</p>
+		<p>夢プロジェクト / 駐車場混雑状況可視化</p>
+	</footer>
+</body>
+</html>
