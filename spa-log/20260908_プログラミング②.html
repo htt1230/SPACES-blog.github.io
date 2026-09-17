@@ -34,7 +34,7 @@
 	</header>
 
 	<main class="log-main">
-		<div class="log-meta"><span>ブログ</span><time datetime="2026-09-10">2026.09.10</time></div>
+		<div class="log-meta"><span>ブログ</span><time datetime="2026-09-08">2026.09.08</time></div>
 		<h1 class="log-title">Arduino UnoからESP32へ移行して，HUB75 LEDパネルを光らせるまで</h1>
 		<p class="log-lead">これまでArduino Uno R3で動かしていたHUB75接続のRGB LEDパネルを，ESP32へ載せ替えてみました．</p>
 
@@ -167,7 +167,7 @@
 				</figure>
 				<p>この時点で，電源，共通GND，HUB75の信号，P10用の走査，ESP32への書き込みが動いていることを確認できました．</p>
 				<p>ただし，最初の表示はまだ完成ではありませんでした．線が本来と違う位置に出たり，中央にあるはずの紫の四角が分かれたりしていました．</p>
-				<p>まあ，最終的にはうまく光らせれたのでOKです．</p>
+				<p>まあ，最終的にはうまく光らせられたのでOKです．</p>
 				<figure class="log-photo-wrap">
 					<img class="log-photo" src="images/20260910/IMG_5592.jpg" alt="" loading="lazy">
 				</figure>
@@ -179,7 +179,7 @@
 			<div>
 				<h2>まとめ</h2>
 				<p>UnoからESP32への移行は，配線を差し替えるだけではできませんでしたがうまくいった方だと思います．</p>
-				<p>Uno固有のGPIO操作をESP32用に変更して，実物の基板を見ながらピンを決め，外部5V電源と共通GNDを確認して，最初に座標テストを書き込むことを行いました．</p>
+				<p>Uno固有のGPIO操作をESP32用に変更して，実物の基板を見ながらピンを決め，外部5V電源と共通GNDを確認して，最初に座標テストを書き込みました．</p>
 				<p>次は，座標テストで分かった向きやずれを補正して，「空」「満」「混」などの文字を正しい向きで表示できるようにしていきます．</p>
 				<p>ばいちゃ！</p>
 			</div>
