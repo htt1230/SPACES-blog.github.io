@@ -30,16 +30,33 @@
 
 		<div class="log-rule"></div>
 
-		<!-- セクション1: 移動 -->
-		<section class="log-section">
-			<div class="log-label">見出し1</div>
-			<div class="log-content" data-markdown>
-## 見出し2
-本文<span class="emphasize">ここにhtmlのspanの挿入も可能</span>
-![移動の様子](images/20260916/IMG_3570.jpg)
-↑テスト画像
-			</div>
-		</section>
+<!-- セクション1: 全ての表現技法テスト -->
+        <section class="log-section">
+            <div class="log-label">表現技法テスト</div>
+            <div class="log-content" data-markdown>
+## 見出しレベル2 (H2)
+通常の段落テキストです。文中に**太字**や*斜体*、~~取り消し線~~、`インラインコード`、そして<span class="emphasize">HTMLのspanタグ</span>を自由に混ぜることができます。
+
+### 見出しレベル3 (H3)
+> **引用ブロック (Blockquote)**
+> 引用文や、特に目立たせたいノート・注意書きなどをここに記述できます。背景色と左側のアクセント線が綺麗に適用されます。
+
+## リストのテスト
+通常の箇条書きリスト：
+- リスト項目その1：要素のテスト
+- リスト項目その2：[リンクのテスト](https://example.com)もここに書けます
+- リスト項目その3：<span class="opa">補足テキスト（opa）</span>
+
+番号付きリスト：
+1. 最初のステップ
+2. 次のステップ
+3. 最後のステップ
+
+## メディア・画像のテスト
+![テスト画像](images/20260916/IMG_3570.jpg)
+↑ `marked.js` により自動で `.log-content img` のスタイルが適用され、枠線やオブジェクトフィットが綺麗に整います。
+            </div>
+        </section>
 
 
 
