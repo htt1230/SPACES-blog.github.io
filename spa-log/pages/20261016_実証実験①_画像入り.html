@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="駐車場に看板を設置し、CPE210越しの通信とアンケートを試した実証実験。早朝からの設置、IPアドレスの変更、小雨、そして最後に気づいた1台の空き。">
+	<meta name="log-title" content="実証実験①">
+	<meta name="log-summary" content="駐車場に看板を設置し、CPE210越しの通信とアンケートを試した実証実験。早朝からの設置、IPアドレスの変更、小雨、そして最後に気づいた1台の空き。">
+	<title>実証実験①</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../../style.css">
+	<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+	<header class="log-header">
+		<a class="log-brand" href="../../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../../signage-images/SPACES.png" alt="SPACES">
+			<span>SPACES</span>
+		</a>
+		<a class="log-back" href="../index.html">ブログ一覧</a>
+	</header>
+
+	<main class="log-main">
+		<div class="log-meta"><span>ブログ</span><time datetime="2026-10-16">2026.10.16</time></div>
+		<h1 class="log-title">実証実験①</h1>
+		<h2>筆者:E</h2>
+		<p class="log-lead">看板を駐車場に置いて、実際に使ってもらいながらアンケートも取る。昨日の夜まで準備していた実証実験、いよいよ本番です。寝不足だけど、遅刻はできない！</p>
+
+		<div class="log-rule"></div>
+
+		<section class="log-section">
+			<div class="log-label">朝7時</div>
+			<div>
+				<h2>寝落ちからの実証実験</h2>
+				<p>おはようございます（7時）。昨日3時に帰宅して、いろいろしていたら4時に床で寝落ち。7時に親に起こされました。<s class="opa">まるで6堀大……おっと、この記事でその名前を出すのは良くないな……。</p></s>
+				<p>今日は実証実験で、警備員さんに朝行きますと伝えてあります。<span class="emphasize">遅刻は許されない。</span></p>
+				<p>看板を設置して、実際にアンケートを実施するのが今日の目的。早く用意しないと間に合わないので、朝ごはんを食べる余裕はありません。親にもらったウィダーインゼリーのラムネ味を片手に、車に乗り込みました。</p>
+				<p>学校に着いたのは7時45分くらい。学食を奢る代わりに手伝いに来てもらったCさんが、ちょっと先に到着していました。ありがたい。</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">設置</div>
+			<div>
+				<h2>看板を定位置へ</h2>
+				<p>作業部屋から看板と、昨日印刷したアンケート協力用紙（面白いデザイン）を持って警備員室へ。看板は台車に載せて運びました。</p>
+				<p>警備員室の方に挨拶して、看板を定位置に設置。これで実証実験スタートです！</p>
+				<figure class="log-photo-wrap"><img class="log-photo" src="../images/20261016/IMG_4451.jpg" alt="第1駐車場の近くに設置した案内看板"></figure>
+				<p>CさんにはQRコードの用紙を持ってもらい、第1駐車場から出てきた人に声をかけてアンケートに答えてもらいます。視認性はバッチリだと思う。じゃあ、さっそくPi 5で看板を操作していきます。</p>
+				<p><span class="emphasize">……あれ？ 切り替わらない？</span></p>
+				<p>昨日やったときは切り替わったのに、なんでだ。IPアドレスが変わった？ 看板のESP32と俺のMacをつないでシリアルモニターを確認すると、見事にIPアドレスが変わっていました。</p>
+				<p>Pi 5側のIPアドレスを編集して、CPE210が苦手（？）とされていたガラス越しで実験。すると、わりかし遠距離なのにラグなく看板が書き変わりました！</p>
+				<p><span class="emphasize">成功したんだ！！</span></p>
+				<figure class="log-photo-wrap"><img class="log-photo" src="../images/20261016/IMG_4455.jpg" alt="窓辺で通信機器を手に持ち、操作画面を確認している様子"></figure>
+				<p>昨日は送受信方法を変更したあと、ガラス越しで実験していませんでした。ガラスが苦手というわけではなかったんだな。</p>
+				<p>自分たちで作った看板が光っているのを見て、結構感動しています。普通に自慢できるレベルだと思う。</p>
+				<p>ただ、今のところCPE210を手で持って看板の方に向けないと、正常に通信できません。後々設置できるようにすれば、持つ手間は省けるはず。</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">駐車場の運用</div>
+			<div>
+				<h2>台数は手動で数えている</h2>
+				<p>ここで、警備員さんが手動で台数管理をしている様子を見ました。</p>
+				<p>俺「これ、台数数えているんですか？」<br>
+				警備員さん「そうです。」<br>
+				俺「マグネットを移動させるんですね」<br>
+				警備員さん「そうです。」<br>
+				俺「この台数って正確なんですかね？」<br>
+				警備員さん「満車に近くなったら別の警備員が自転車で巡回し、正確にカウントするんです。」<br>
+				俺「なるほど。そのためのチャリだったのか。」</p>
+				<figure class="log-photo-wrap"><img class="log-photo" src="../images/20261016/IMG_4454.jpg" alt="窓辺で通信機器を手に持ち、操作画面を確認している様子"></figure>
+
+				<p>数学の大先生、I先生が車で来るのも見かけました。<i><b>Civic Type R</b></i>に乗っていて、非常にカッコいい（大ヒントである）。せっかくなので、車から降りてきたところに声をかけて、アンケートのQRコードを見せました。</p>
+				<p>どうやらGoogleログインが必要だったらしく、手間をかけさせてしまった。申し訳ない。</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">台数調整</div>
+			<div>
+				<h2>残り台数を手動で更新</h2>
+				<p>なんやかんやで残り台数が15台を切ったあたりから、HTML上で実際に台数調整をしてみました。今のところ、台数は手動で調節します。</p>
+				<p><span class="emphasize">これ結構大変。</span>一人でCPE210を持ちながら、台数も変えなきゃいけない。</p>
+				<p>残り5台くらいになったころ、小雨が降ってきました。Cさんから電話がかかってきます。</p>
+				<p>C「雨降ってきたけど、看板大丈夫そう？」<br>
+				俺「看板は大丈夫だと思う。逆にCさんは雨大丈夫？ 傘ないけど。」<br>
+				C「ちょっとまずいかも」<br>
+				俺「無理しないでね。無理だったら帰ってきてね」</p>
+				<p>こんな会話をしていました。でも内心、俺は看板が不安だった。初めての雨だもんね。</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">実験終了</div>
+			<div>
+				<h2>満車表示のあとに、もう1台</h2>
+				<p>警備員さんが最後の1台を入れて、表示上は0台に。俺は看板を「満」に切り替えました。やっと終わりましたか〜と思い、Cさんと話していると……。</p>
+				<figure class="log-photo-wrap"><img class="log-photo" src="../images/20261016/IMG_4459.jpg" alt="警備員室のそばに設置した満車表示の看板"></figure>
+
+				<p><span class="emphasize">一台の車が入っていた。</span></p>
+				<p>俺は満車だと思い込んでいたけれど、その人の声を聞くと「1台空いている」と言っていました。<a href="../../What-is-Spaces.html#problem">SPACESを始めようと思ったきっかけ</a>と同じだな、と思った。それと同時に、警備員さんの大変さも分かりました。出ていく車は見えないんですよね。実際に、見えないと言っていました。</p>
+				<p>これをもって実証実験は終了。看板には水滴が付いていました。疲れて汗が滴っているようだった。<span class="opa">（なんでちょっと文学的なんだよ）</span></p>
+				<figure class="log-photo-wrap"><img class="log-photo" src="../images/20261016/IMG_4460.jpg" alt="看板の表面についた雨粒"></figure>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">昼ごはん</div>
+			<div>
+				<h2>Cさんに学食を奢る</h2>
+				<p>作業部屋に戻って仮眠をとり、約束どおりCさんに昼飯（HITの学食）を奢りました。かなりお腹が空いていたようで、「2品頼んでいい？」と聞かれたので、もちろんOK。</p>
+				<figure class="log-photo-wrap"><img class="log-photo" src="../images/20261016/IMG_4462.jpg" alt="HITの学食で食べた昼ごはん"></figure>
+				<p>なぜなら、奢る予定だった人がもう一人いたのに、2度寝して遅刻してきたからです。</p>
+				<p><span class="emphasize">手伝いに来てくれて、本当にありがとう。</span></p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">ずっとブログを書いていて...</div>
+			<div>
+				<h2>疲労</h2>
+				<p>このブログのほかに、10/9と10/15のブログも書いていました。txtに書きたいことをまとめて、それを今まで自分が書いた書き癖をcodexにまとめてもらって、AIで書いてもらっている。</p>
+				<p>関係ないが、俺は最近ゴンチャにハマっている。同じ学部の同じ開発メンバーの中の人にゴンチャを紹介されて以来、ハマっている。今日も飲みたくなって買いに行ってしまった。</p>
+				<p><span class="emphasize">ゴンチャ、気が利くねぇ！！</span></p>
+				<figure class="log-photo-wrap"><img class="log-photo" src="../images/20261016/IMG_4464.jpg" alt="警備員室のそばに設置した満車表示の看板"></figure>
+
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">次回</div>
+			<div>
+				<h2>警備員室のWi-Fiをどうするか</h2>
+				<p>次は警備員室でのWi-Fi環境をどうするかだよな。</p>
+			</div>
+		</section>
+	</main>
+
+	<footer class="log-footer">
+		<p>SPACES / ブログ</p>
+		<p>夢プロジェクト / 駐車場混雑状況可視化</p>
+	</footer>
+</body>
+</html>
