@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="SPACESブログ。mdで書けるようにしてみた">
+	<title>サイトをmdで書けるようにしてみた</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
+    <!-- marked.js CDNの読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+	<header class="log-header">
+		<a class="log-brand" href="../../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../../signage-images/SPACES.png" alt="SPACES">
+			<span>SPACES</span>
+		</a>
+		<a class="log-back" href="../index.html">ブログ一覧</a>
+	</header>
+
+	<main class="log-main">
+		<div class="log-meta"><span>ブログ</span><time datetime="2026-09-29">2026.09.29</time></div>
+		<h1 class="log-title">html→mdを試してみた</h1>
+		<h2>筆者:E</h2>
+		<p class="log-lead">完全に番外編です。mdファイルをhtmlに変換してブログを書く効率をあげようということ。</p>
+
+		<div class="log-rule"></div>
+
+<!-- セクション1: 全ての表現技法テスト -->
+        <section class="log-section">
+            <div class="log-label">表現技法テスト</div>
+            <div class="log-content" data-markdown>
+## 見出しレベル2 (H2)
+通常の段落テキストです。文中に**太字**や*斜体*、~~取り消し線~~、`インラインコード`、そして<span class="emphasize">HTMLのspanタグ</span>を自由に混ぜることができます。
+
+### 見出しレベル3 (H3)
+> **引用ブロック (Blockquote)**
+> 引用文や、特に目立たせたいノート・注意書きなどをここに記述できます。背景色と左側のアクセント線が綺麗に適用されます。
+
+## リストのテスト
+通常の箇条書きリスト：
+- リスト項目その1：要素のテスト
+- リスト項目その2：[リンクのテスト](https://example.com)もここに書けます
+- リスト項目その3：<span class="opa">補足テキスト（opa）</span>
+
+番号付きリスト：
+1. 最初のステップ
+2. 次のステップ
+3. 最後のステップ
+
+## Qiita風コードブロック
+<div class="code">
+<div class="code-language">python</div>
+<pre><code><span class="code-comment"># Tkinterを読み込む</span>
+<span class="code-keyword">import</span> tkinter
+
+<span class="code-comment"># ウィンドウを作成する</span>
+window = tkinter.Tk()
+
+<span class="code-comment"># ウィンドウのイベントループ</span>
+window.<span class="code-function">mainloop</span>()</code></pre>
+</div>
+
+## メディア・画像のテスト
+![テスト画像](../images/20260916/IMG_3570.jpg)
+↑ `marked.js` により自動で `.log-content img` のスタイルが適用され、枠線やオブジェクトフィットが綺麗に整います。
+            </div>
+        </section>
+
+
+
+
+	</main>
+
+	<footer class="log-footer">
+		<p>SPACES / ブログ</p>
+		<p>夢プロジェクト / 駐車場混雑状況可視化</p>
+	</footer>
+
+	<!-- Markdownを自動でHTMLに変換して流し込むスクリプト -->
+	<script>
+		document.querySelectorAll('[data-markdown]').forEach(el => {
+			// インデントのズレを防ぐためトリムしてからパースする
+			const rawMarkdown = el.innerHTML.trim();
+			el.innerHTML = marked.parse(rawMarkdown);
+		});
+	</script>
+</body>
+</html>

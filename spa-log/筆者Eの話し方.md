@@ -33,6 +33,26 @@
 
 Markdown本文に装飾を入れる場合も、これらはHTMLタグのまま記述する。
 
+## コードブロックの書き方
+
+Qiita風の暗色コードブロックは、Markdown本文にHTMLで記述する。言語名を上部に表示し、コード本体を`pre`と`code`で囲む。
+
+```html
+<div class="code">
+  <div class="code-language">python</div>
+  <pre><code><span class="code-comment"># コメント</span>
+<span class="code-keyword">import</span> tkinter
+window.<span class="code-function">mainloop</span>()</code></pre>
+</div>
+```
+
+- `code-comment`: コメントを灰色にする。
+- `code-keyword`: `import`などのキーワードをピンクにする。
+- `code-string`: 文字列を緑系にする。
+- `code-function`: 関数名を明るい緑にする。
+
+コードブロックは暗色背景、角丸、等幅フォントで表示される。長い行はブロック内で横スクロールする。言語名と色分けは必要に応じて指定し、コードは実際の内容に置き換える。
+
 ## 文体を再現する際の注意
 
 記事にある口語表現や誤記を機械的に増やすのではなく、自然な一人称の記録として書く。記事にない出来事、感情、口癖を筆者の特徴として作り足さない。特に「筆者:E」の明記がない記事は、Eの文体の根拠に含めない。
