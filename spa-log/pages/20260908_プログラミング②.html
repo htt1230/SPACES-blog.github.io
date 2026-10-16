@@ -8,8 +8,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
 	<style>
 		.log-diagram { max-width: 100%; margin: 20px 0; padding: 20px 22px; overflow-x: auto; background: #e9eef4; border-left: 4px solid var(--log-blue); font-size: .9rem; line-height: 1.7; }
 		.log-diagram code { font-family: Consolas, "BIZ UDP Gothic", monospace; }
@@ -26,16 +26,17 @@
 </head>
 <body>
 	<header class="log-header">
-		<a class="log-brand" href="../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
-			<img src="../signage-images/SPACES.png" alt="SPACES">
+		<a class="log-brand" href="../../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../../signage-images/SPACES.png" alt="SPACES">
 			<span>SPACES</span>
 		</a>
-		<a class="log-back" href="index.html">ブログ一覧</a>
+		<a class="log-back" href="../index.html">ブログ一覧</a>
 	</header>
 
 	<main class="log-main">
 		<div class="log-meta"><span>ブログ</span><time datetime="2026-09-08">2026.09.08</time></div>
 		<h1 class="log-title">Arduino UnoからESP32へ移行して，HUB75 LEDパネルを光らせるまで</h1>
+		<h2>筆者:T</h2>
 		<p class="log-lead">これまでArduino Uno R3で動かしていたHUB75接続のRGB LEDパネルを，ESP32へ載せ替えてみました．</p>
 
 		<section class="log-section">
@@ -101,7 +102,7 @@
 				</tbody>
 				</table>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/image.png" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/image.png" alt="" loading="lazy">
 				</figure>
 				<p>※HUB75配線画像'https://learn.adafruit.com/32x16-32x32-rgb-led-matrix/new-wiring'様より引用</p>
 				</div>
@@ -117,7 +118,7 @@
 外部電源 V-  → LEDパネルのGND
 外部電源 V-  → ESP32のGND</code></pre>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/image2.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/image2.jpg" alt="" loading="lazy">
 				</figure>
 				<p>大事なのは，外部電源，LEDパネル，ESP32のGNDを共通にすることです．GNDが共通でないと，ESP32が出している信号をパネル側で正しく判断できません．</p>
 				<p>今回はESP32の3.3V信号をそのままつないで点灯しました．ただし，安定して動かすなら74AHCT245などを使って5Vへレベル変換した方がよさそうです．</p>
@@ -163,13 +164,13 @@
 				<p>コンパイル成功，書き込み成功，ハッシュ検証成功，ESP32の再起動まではログで確認できました．</p>
 				<p>よっしゃ光った！ぐちゃぐちゃだけど．</p>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/IMG_5591.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/IMG_5591.jpg" alt="" loading="lazy">
 				</figure>
 				<p>この時点で，電源，共通GND，HUB75の信号，P10用の走査，ESP32への書き込みが動いていることを確認できました．</p>
 				<p>ただし，最初の表示はまだ完成ではありませんでした．線が本来と違う位置に出たり，中央にあるはずの紫の四角が分かれたりしていました．</p>
 				<p>まあ，最終的にはうまく光らせられたのでOKです．</p>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/IMG_5592.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/IMG_5592.jpg" alt="" loading="lazy">
 				</figure>
 			</div>
 		</section>

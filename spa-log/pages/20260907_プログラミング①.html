@@ -8,23 +8,24 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
 	<meta name="log-title" content="プログラミング①">
 	<meta name="log-summary" content="ESP32が届くまでにP10LEDを光らせるために頑張ったことをまとめました。Arduino Uno R3でHUB75接続のRGB LEDパネルを光らせるまでの道のりです。">
 </head>
 <body>
 	<header class="log-header">
-		<a class="log-brand" href="../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
-			<img src="../signage-images/SPACES.png" alt="SPACES">
+		<a class="log-brand" href="../../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../../signage-images/SPACES.png" alt="SPACES">
 			<span>SPACES</span>
 		</a>
-		<a class="log-back" href="index.html">ブログ一覧</a>
+		<a class="log-back" href="../index.html">ブログ一覧</a>
 	</header>
 
 	<main class="log-main">
 		<div class="log-meta"><span>ブログ</span><time datetime="2026-09-07">2026.09.07</time></div>
 		<h1 class="log-title">Arduino Uno R3でP10 LEDを光らせた話</h1>
+		<h2>筆者:T</h2>
 		<p class="log-lead">Arduino Uno R3を使ってP10LEDを光らせるために頑張った話を書いていきます．</p>
 
 		<section class="log-section">
@@ -54,7 +55,7 @@
 				<h2>2. Arduinoを使って遂に光る...か？</h2>
 				<p>Arduinoならライブラリを入れて，配線して，サンプルコードを書き込めば光ると思っていました．</p>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/IMG_5577.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/IMG_5577.jpg" alt="" loading="lazy">
 				</figure>
 				<p>最初は<code>Adafruit RGBmatrixPanel</code>を使っていました．コンパイルも通るし，Arduinoにも書き込める．しかし表示されたのは，図形が分裂してぐちゃぐちゃになったり，縦線だけしか表示されなかったり，よく分からないブロックが並んだりする状態でした．</p>
 				<p>最初は配線ミスかと思い，A/B/C/Dの線を入れ替えたり，差し込みなおしたり...<br>WIDTHやHEIGHTを変えたりしましたが，何をしてもまともな形になりませんでした．</p>
@@ -80,12 +81,12 @@
 				<h2>4. 文字より座標テストのほうが大事だった</h2>
 				<p>最初は「空」の文字を出そうとしていました．しかし文字が崩れると，フォントが悪いのか，左右反転しているのか，走査方式が間違っているのか，全く分かりませんでした．</p>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/IMG_5578.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/IMG_5578.jpg" alt="" loading="lazy">
 				</figure>
 				<p>そこで文字を一度やめて，上端を赤，下端を青，左端を緑，右端を白にするテスト表示を作りました．真ん中には紫の四角を置いて，四隅にも違う色を置きました．</p>
 				<p>これを表示すると，上下左右の反転や，中央が分裂している問題が見つけやすくなりました．円のような左右対称の図形だと，反転していても気付きにくいです．</p>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/IMG_5592.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/IMG_5592.jpg" alt="" loading="lazy">
 				</figure>
 				
 				<p>文字を表示したいときほど，最初は文字を使わないほうがいいと分かりました．</p>
@@ -98,7 +99,7 @@
 				<h2>5. 2枚つなぐと，表示の順番が逆になる</h2>
 				<p>今回の配線は，Arduinoから下段パネルのINに入り，下段のOUTから上段のINへつないでいます．</p>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/image1.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/image1.jpg" alt="" loading="lazy">
 				</figure>
 				<p>数珠つなぎなので，先に送った64クロック分のデータは奥にある上段パネルへ流れていきます．後半の64クロック分が，下段パネルに残ります．</p>
 				<p>ここを逆に考えていたので，上下が入れ替わったり，文字が変な位置に出たりしました．</p>
@@ -127,10 +128,10 @@
 				<p>Arduino UnoはSRAMが2048 byteしかありません．32×32の画面を持つだけで1024 byte使うので，フォントはPROGMEMに置いて，色は8色に絞りました．</p>
 				<p>最終的に，緑色の「空」と赤色の「満」を表示できました．</p>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/IMG_5594.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/IMG_5594.jpg" alt="" loading="lazy">
 				</figure>
 				<figure class="log-photo-wrap">
-					<img class="log-photo" src="images/20260910/IMG_5593.jpg" alt="" loading="lazy">
+					<img class="log-photo" src="../images/20260910/IMG_5593.jpg" alt="" loading="lazy">
 				</figure>
 			</div>
 		</section>

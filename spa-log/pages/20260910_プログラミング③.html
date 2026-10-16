@@ -8,8 +8,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
 	<style>
 		.log-diagram { max-width: 100%; margin: 20px 0; padding: 20px 22px; overflow-x: auto; background: #e9eef4; border-left: 4px solid var(--log-blue); font-size: .9rem; line-height: 1.7; }
 		.log-diagram code { font-family: Consolas, "BIZ UDP Gothic", monospace; }
@@ -19,16 +19,17 @@
 </head>
 <body>
 	<header class="log-header">
-		<a class="log-brand" href="../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
-			<img src="../signage-images/SPACES.png" alt="SPACES">
+		<a class="log-brand" href="../../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../../signage-images/SPACES.png" alt="SPACES">
 			<span>SPACES</span>
 		</a>
-		<a class="log-back" href="index.html">ブログ一覧</a>
+		<a class="log-back" href="../index.html">ブログ一覧</a>
 	</header>
 
 	<main class="log-main">
 <div class="log-meta"><span>ブログ</span><time datetime="2026-09-10">2026.09.10</time></div>
 <h1 class="log-title">ESP32で光ったLEDパネルを，2枚の表示とWeb操作へつなげるまで</h1>
+<h2>筆者:T</h2>
 <p class="log-lead">前回は，Arduino Unoで動かしていたLEDパネルをESP32へ載せ替えて，とりあえず実際に光らせるところまで進みました．</p>
 <p>今回はその続きです．</p>
 <p>配線の時点でパネルはすでに2枚つながっていましたが，最初は光らせるだけで精一杯でした．そこから表示の向きや位置を調整して，文字を出して，ブラウザから絵を送って，最後はESP32のWi-Fiにつないで操作できるようにしました．</p>
@@ -39,13 +40,13 @@
 <p>飛ばしていますが，前回か前々回で文字を正しく表示するための調整はしてありました．</p>
 <p>友達が駐車場の看板で使うために，「空」「混」「満」の表示を用意してくれました．</p>
 <figure class="log-photo-wrap">
-	<img class="log-photo" src="images/20260910/image3.jpg" alt="" loading="lazy">
+	<img class="log-photo" src="../images/20260910/image3.jpg" alt="" loading="lazy">
 </figure>
 <figure class="log-photo-wrap">
-	<img class="log-photo" src="images/20260910/image4.jpg" alt="" loading="lazy">
+	<img class="log-photo" src="../images/20260910/image4.jpg" alt="" loading="lazy">
 </figure>
 <figure class="log-photo-wrap">
-	<img class="log-photo" src="images/20260910/image5.jpg" alt="" loading="lazy">
+	<img class="log-photo" src="../images/20260910/image5.jpg" alt="" loading="lazy">
 </figure>
 <p>「混」はオレンジ色に見せたかったのですが，赤と緑を時間で切り替えるやり方だと，目を動かしたときに赤と緑が別々に見えることがありました．少しちらついて見える感じです．</p>
 <p>そこで，この8色表示では無理にオレンジを作るのではなく，赤と緑を同時に点ける黄色に寄せました．オレンジっぽさよりも，看板の文字が落ち着いて読めることを優先しました．</p>
@@ -67,7 +68,7 @@ ESP32に書き込み
 <p>なかなか面倒くさい．</p>
 <p>そこで，Webブラウザで絵を作って，その画素データをESP32へ送る「LED Maker」を作りました．</p>
 <figure class="log-photo-wrap">
-	<img class="log-photo" src="images/20260910/image6.png" alt="" loading="lazy">
+	<img class="log-photo" src="../images/20260910/image6.png" alt="" loading="lazy">
 </figure>
 <p>最初のWeb版には，次の機能を入れました．</p>
 <ul class="log-list">
@@ -96,7 +97,7 @@ LEDパネルへ表示する</code></pre>
 <h2>駐車場看板の表示画面を作る</h2>
 <p>駐車場で使いやすいように「空」「混」「満」を選ぶ専用画面を作りました．</p>
 <figure class="log-photo-wrap">
-	<img class="log-photo" src="images/20260910/image7.png" alt="" loading="lazy">
+	<img class="log-photo" src="../images/20260910/image7.png" alt="" loading="lazy">
 </figure>
 <p>「空」は緑，「混」は黄，「満」は赤です．</p>
 <p>「混」は，混雑を示す文字と残り台数を2秒ごとに切り替えるようにしました．</p>
@@ -126,7 +127,7 @@ LEDパネルへ表示する</code></pre>
 <p>また，USB版ではブラウザ側で行っていた「混」と台数の2秒切り替えを，Wi-Fi版ではESP32側へ移しました．これならスマホの画面を閉じても，ESP32だけで表示を切り替え続けられます．</p>
 <p>そして，スマホで操作できるようになりました．</p>
 <figure class="log-photo-wrap">
-	<img class="log-photo" src="images/20260910/image8.jpg" alt="" loading="lazy">
+	<img class="log-photo" src="../images/20260910/image8.jpg" alt="" loading="lazy">
 </figure>
 </div>
 </section>

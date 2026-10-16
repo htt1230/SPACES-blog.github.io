@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const root = __dirname;
-const files = fs.readdirSync(root)
-  .filter((name) => name.endsWith('.html') && name !== 'index.html')
+const pagesDir = path.join(root, 'pages');
+const files = fs.readdirSync(pagesDir)
+  .filter((name) => name.endsWith('.html'))
   .sort((a, b) => a.localeCompare(b, 'ja'));
 
 // Explicit list labels take priority over the article heading and opening text.
@@ -47,12 +48,12 @@ const extractSummary = (html) => {
 };
 
 const entries = files.map((fileName, index) => {
-  const filePath = path.join(root, fileName);
+  const filePath = path.join(pagesDir, fileName);
   const html = fs.readFileSync(filePath, 'utf8');
 
   return {
     title: extractListMeta(html, 'title') ?? extractTitle(html),
-    file: fileName,
+    file: `pages/${fileName}`,
     date: extractDate(html),
     summary: extractListMeta(html, 'summary') ?? extractSummary(html),
     order: index + 1
