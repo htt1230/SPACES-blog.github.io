@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="HUB75ケーブルを付け替え、Pi 5とESP32の通信を見直し。CPE210のWi-Fiで看板を光らせるところまで、深夜2時半まで試しました。">
+	<meta name="log-title" content="徹夜でラズパイ通信">
+	<meta name="log-summary" content="HUB75ケーブルを付け替え、Pi 5とESP32の通信を見直し。CPE210のWi-Fiで看板を光らせるところまで、深夜2時半まで試しました。">
+	<title>徹夜でラズパイ通信</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDP+Gothic:wght@400;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../../style.css">
+	<link rel="stylesheet" href="../style.css">
+	<style>
+		.log-diagram { max-width: 100%; margin: 20px 0; padding: 20px 22px; overflow-x: auto; background: #e9eef4; border-left: 4px solid var(--log-blue); font-size: .9rem; line-height: 1.7; }
+		.log-diagram code { font-family: Consolas, "BIZ UDP Gothic", monospace; }
+	</style>
+</head>
+<body>
+	<header class="log-header">
+		<a class="log-brand" href="../../What-is-Spaces.html" aria-label="SPACESトップページへ戻る">
+			<img src="../../signage-images/SPACES.png" alt="SPACES">
+			<span>SPACES</span>
+		</a>
+		<a class="log-back" href="../index.html">ブログ一覧</a>
+	</header>
+
+	<main class="log-main">
+		<div class="log-meta"><span>ブログ</span><time datetime="2026-10-15">2026.10.15</time></div>
+		<h1 class="log-title">徹夜でラズパイ通信</h1>
+		<h2>筆者:E</h2>
+		<p class="log-lead">10月16日の実証実験に向けて、HUB75ケーブルの付け替えと、Pi 5・ESP32・看板の通信テストをしました。気づいたら深夜2時半。Wi-Fiも電源も、そう簡単にはいかなかった……。</p>
+
+		<div class="log-rule"></div>
+
+		<section class="log-section">
+			<div class="log-label">作業開始</div>
+			<div>
+				<h2>おはようございます（15時）</h2>
+				<p>放課後になったので、さっそく作業を始めていきます。みんなはJPHACKSの会議をしていて忙しそう。<span class="opa">（うちの班は何もしていない。まずい。）</span></p>
+				<p>自分一人でいつもの作業部屋にいるのも寂しいので、JPHACKSの会議部屋に移動して作業することにしました。</p>
+				<div class="log-note">JPHACKSは、学生がチームでアイデアを形にする国内最大級の学生ハッカソンです。全国の学生が集まり、短期間でサービスや作品の開発に取り組みます。<a href="https://jphacks.com/information/open-2026/" target="_blank" rel="noopener noreferrer">JPHACKS公式サイト</a></div>
+				<p>その道中、借りてきたポータブル電源を台車に乗せて、電源を入れたまま運んだ。</p>
+				<p class="opa">←入れる意味ないだろ。目立ちすぎるだろ。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4398.jpg" alt="モニターやRaspberry Piなどを広げた作業机">
+				</figure>
+				<p>今日やるのは、看板のHUB75ケーブルの付け替えと、CPE210のWi-Fi通信テスト。10月16日に実証実験したいです！ってメールを送ってしまったので、そこに間に合わせるために頑張ります。</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">HUB75</div>
+			<div>
+				<h2>ジャンパ線を卒業したい</h2>
+				<p>看板の表裏にあるLEDをつなぐHUB75ケーブルの長さが足りず、これまでは他の団体から<span class="opa">パクってきた……じゃなくて</span>借りてきたジャンパ線で代用していました。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4404.jpg" alt="">
+				</figure>
+				<p>さすがに申し訳ないので、ちゃんとしたHUB75ケーブルを発注。特殊な規格なのか、どこのECサイトを見ても見つからず、AliExpressで10本入りをようやく発見しました。すごいマニアックなパーツだ。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4402.jpg" alt="">
+				</figure>
+				<p>にしても、なんでオスオスのジャンパ線で代用できたんだろ……。</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">通信テスト</div>
+			<div>
+				<h2>「最強のWi-Fi」でも届かない</h2>
+				<p>Tが作ってくれたプログラムで実証実験。まずは会議部屋から、外にいる看板へ通信してみます。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4405.jpg" alt="">
+				</figure>
+				<p><span class="emphasize">何も通じなかった。</span></p>
+				<p>CPE210という最強のWi-Fiでもダメ。看板を部屋に持って帰ることになりました。これを運ぶの、結構面倒なんですよね。</p>
+				<p>出るときはD棟、入るときはE棟1階から。ちょうどE棟ではセミナーかイベントのようなものがあって、スーツ姿の人たち50人くらいが真剣に話を聞いていました。そこに台車の重低音が響き渡る。しかも看板には「混」の文字。</p>
+				<p><span class="emphasize">めっっちゃ見られた。恥ずかしい。</span><span class="opa">（でも正直、自慢したくなる。）</span></p>
+				<p>距離が離れすぎていたのかもしれないので、同じ高さでも試しました。警備員室から電波を飛ばす想定で、HITプラザのガラス越しにテスト。それでもESP32に接続できないくらい重い。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4407.jpg" alt="">
+				</figure>
+				<p>このときはESP32側でHTMLを含めて管理していて、ESP32につながらないと操作画面も読み込めません。通信も遅い。そこでTから「通信を最低限まで削ればいいんじゃね？」という案が出ました。</p>
+				<p>Pi 5でHTMLの操作画面を表示して、看板側には状態を表す1文字だけを送る。ESP32は受け取った数字を見て表示を切り替えるだけにする、という考え方です。</p>
+				<pre class="log-diagram"><code>ブラウザで操作
+      ↓
+Pi 5（HTML画面・状態を決める）
+      ↓  0 / 1 / 2 の1文字だけ
+CPE210（spaces Wi-Fi）
+      ↓
+ESP32（受信した数字に合わせて看板を表示）
+
+空車 = 0　／　混雑 = 1　／　満車 = 2</code></pre>
+				<p>HTMLデータをやりとりするより、通信量をかなり減らせそう。とりあえずこの方針で進めます。</p>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">ESP32</div>
+			<div>
+				<h2>Arduino IDEでIPアドレスが出た！</h2>
+				<p>看板をまた会議部屋に持って帰ります。やっぱり持って帰るのだるい。</p>
+				<p>前回セットアップしたPi 4たちは、SSH接続で使う方針になって初期化されたそうです。映像配信の機能しかなかったので、そこは大丈夫だったみたい。</p>
+				<p>ここでTは、21時に閉まるスープカレー屋へ20時半にテイクアウトしに行くということで離脱。看板内部のESP32を触ったことがなかったので、担当のTに少し教えてもらいました。</p>
+				<p>Arduino IDEで作業していたのですが、ESP32用のボードサポート（ライブラリ？拡張機能？）が必要だと知らず、最初はうまくいきませんでした。必要な設定をして、Codexと一緒に書いたプログラムを動かしてみます。</p>
+				<p>シリアルモニタを見ると、<span class="emphasize">IPアドレスが表示された！最高だな。</span></p>
+				
+				<p>プログラムは、まずCPE210の「spaces」に接続して、つながらない場合はeduroamに接続する構成です。心配だったのは、警備員室のガラス越しでも「spaces」が使えるのかどうか。</p>
+				<p>一度「spaces」を使わず、eduroamだけで看板を光らせてみました。台車で廊下を走り回ってもWi-Fiはほぼ途切れず、F棟とE棟の間で少し切れるくらい。安定してるじゃん！と思ったのですが、警備員室では別の問題が待っていました。</p>
+				<p>その前に腹ごしらえ。Tが学校に戻るタイミングでローソンで何か買うか聞いてくれました。Rと話していたらフードDも穴場では、という話になり、Rから「すかいらーくの25%引きあるし、ガストでいんじゃね？」と提案が。テイクアウトを買って、ついでにTも拾いました。おいしいご飯をいただきました。25%引き、結構コスパいいと思う。</p>
+								<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4417.jpg" alt="">
+				</figure>
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">電源問題</div>
+			<div>
+				<h2>部屋を出るまでに何往復？</h2>
+				<p>警備員室のWi-Fiがあるか忘れてしまったので、Tと一緒に確認しに行くことに。実際に使うPi 5を持っていきます。</p>
+				<p>借りたMakitaの電源にPi 5、タッチパネル、通信ケーブル、HDMIなどをつないで、いざ出発。</p>
+				<p>あれ、タッチできなくね？ 部屋に戻る。通信用ケーブルに替えて、もう一度出発。あれ、画面チカチカするくね？ 部屋に戻る。タッチパネルにも電源をつないで出発。あれ、Pi 5の電源が安定しなくね？ また戻る。</p>
+				<p>これ以外にも5回くらい部屋に戻った。Makitaの電源とPi 5とタッチパネルの相性が悪すぎる。電力不足かな……。</p>
+				<p>というわけで、看板につないだままの重たいポータブル電源を運ぶことに。看板を下ろすのも大変だし、せっかくだからそのまま持っていきます。</p>
+				<p>こっちにつなぐと電源が安定して、画面もチカチカしないしPi 5も落ちなくなりました。</p>
+
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">警備員室</div>
+			<div>
+				<h2>そこにWi-Fiがない！</h2>
+				<p>やっと外に出ました。寒い。Tに「これ光らせる意味ないだろ」と言われた。</p>
+				<p><span class="emphasize">それはそう。もはや人工太陽だ。（緑だけど。）</span></p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4436.jpg" alt="電源タップとケーブルの接続を確認している様子">
+				</figure>
+				<p>でも正直おもしろかったので、光らせたまま警備員室へ。警備員さんに「明日の実証実験のことって聞いていますか？」と聞いたら、「聞いていますよ！」とのこと。事前にメールしておいたので、話がスムーズでよかった。</p>
+				<p>Pi 5の画面を見て、Wi-Fiを拾っているか確認します。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4431.jpg" alt="電源タップとケーブルの接続を確認している様子">
+				</figure>
+				<p class="opa">これ結構自信作</p>
+				<p><span class="emphasize">絶望した。何もない。</span></p>
+				<p>これじゃ通信できないじゃん！ eduroamも使えないじゃん！ ガラス越しではCPE210も使えなかったし、警備員室にインターネット環境はない。明日実証実験しますって宣言しておいて、できないパターン……？これはまずい。居残り決定です。</p>
+				<p>緊急会議が始まりました。まるで授業だ。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4439.jpg" alt="廊下に設置した看板が緑色に光っている様子">
+				</figure>
+				<p>そのあと、ケーブルを少し動かしたときにminiPCの電源が落ちて、何で？となったのですが、後でminiPCを電源タップにつないでいたことが原因と分かり、今は解決済みです。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4438.jpg" alt="廊下に設置した看板が緑色に光っている様子">
+				</figure>
+				<p>眠すぎて10分くらい気絶したあと、Tがいろいろ試して教えてくれました。eduroamを中継するのはセキュリティ上できない。やっぱりCPE210で「spaces」というWi-Fiを出して、ESP32をそこにつなぐのがよさそう。</p>
+				<p>Rはずっと映像転送に取り組んでいて、警備員室のPi 5用にカメラ監視システムを作ってくれていました。そこに自分が作っていた管理用HTMLを統合します。URLを書き換えたら画面にエラーが出た。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4440.jpg" alt="廊下に設置した看板が緑色に光っている様子">
+				</figure>
+				<p>てか、<span class="emphasize">プリティ プリント</span>って何だよwwww かわいい印刷？www とツボにハマっていました。プログラムの「pretty-print」は、データを読みやすく整形して出力することらしい。あとでURLの形式が間違っていたことが分かり、修正したらちゃんと接続できました。</p>
+
+			</div>
+		</section>
+
+		<section class="log-section">
+			<div class="log-label">深夜2時半</div>
+			<div>
+				<h2>50mくらい先まで届いた</h2>
+				<p>さっそくESP32と「spaces」の接続テスト。CPE210を廊下に持ち出して、どのくらい離れても通信できるのか試します。</p>
+				<p>結構行けた。50mくらいかな。</p>
+				<figure class="log-photo-wrap">
+					<img class="log-photo" src="../images/20261015/IMG_4445.jpg" alt="廊下の看板が点灯している様子">
+				</figure>
+			</div>
+		</section>
+		<section class="log-section">
+			<div class="log-label">次回</div>
+			<div>
+				<h2>実証実験</h2>
+				<div class="log-note">成功させなければならない... そもそも早起きしなければならない...</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="log-footer">
+		<p>SPACES / ブログ</p>
+		<p>夢プロジェクト / 駐車場混雑状況可視化</p>
+	</footer>
+</body>
+</html>
